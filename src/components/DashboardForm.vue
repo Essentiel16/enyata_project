@@ -102,6 +102,19 @@
 
 <script>
 export default {
+  name: 'DashboardForm',
+  data() {
+    return {
+      msg: 'Welcome',
+      form: {
+      },
+    };
+  },
+  methods: {
+  },
+  computed: {
+
+  },
 };
 </script>
 
