@@ -1,6 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import DashboardForm from '../components/DashboardForm.vue';
+import TakeAssessment from '../components/TakeAssessment.vue';
+import Successful from '../components/Successful.vue';
+import CreateApplication from '../components/CreateApplication.vue';
+import ComposeAssessment from '../components/ComposeAssessment.vue';
+import ForgetPassword from '../components/ForgetPassword.vue';
+// import UserSignup from '../components/UserSignup.vue';
 
 Vue.use(VueRouter);
 
@@ -11,12 +18,34 @@ const routes = [
     component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/dashboard',
+    name: 'DashboardForm',
+    component: DashboardForm,
+  },
+  {
+    path: '/assessment',
+    name: 'TakeAssessment',
+    component: TakeAssessment,
+  },
+  {
+    path: '/successful',
+    name: 'Successful',
+    component: Successful,
+  },
+  {
+    path: '/application',
+    name: 'CreateApplication',
+    component: CreateApplication,
+  },
+  {
+    path: '/compose',
+    name: 'ComposeAssessment',
+    component: ComposeAssessment,
+  },
+  {
+    path: '/forget',
+    name: 'ForgetPassword',
+    component: ForgetPassword,
   },
 ];
 
