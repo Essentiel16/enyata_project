@@ -45,12 +45,15 @@
                 <img src="../assets/Setting.svg" alt="" class="mr-3 d-inline-block">
                     Settings
             </b-nav-item>
+    </b-nav>
+        </div>
+            <div class="logout">
             <b-nav-item href="#" >
                 <img src="../assets/logout.svg" alt="" class="mr-3 d-inline-block">
                     LogOut
             </b-nav-item>
-    </b-nav>
-        </div>
+            </div>
+
     </div>
 </template>
 
@@ -126,5 +129,8 @@ color: #7557d3;
 /* background: cadetblue; */
 font-weight: 700;
 border-left-color: #7557d3;
+}
+.logout{
+    margin-top: 231pxp;
 }
 </style>

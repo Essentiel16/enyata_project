@@ -9,15 +9,32 @@ export default new Vuex.Store({
     users: [],
   },
   mutations: {
-    setRegister(state, payload) {
-      state.users = payload;
+    setRegister: (state, payload) => {
+      state.users.push(payload);
     },
   },
   actions: {
-    getUserDetail({ commit }) {
-      axios.post()
-        .then((response) => {
-          commit('setRegister', response.data);
+    async getUserDetail({ commit }, payload) {
+      const formdata = new FormData();
+      console.log(payload);
+      const response = await axios.post('https://enyata-recruitment-portal.herokuapp.com/apply', payload, formdata);
+      commit('setRegister', response.data);
+      console.log(response);
+    },
+
+    async onUpload() {
+      // eslint-disable-next-line no-undef
+      const fd = new FormFile();
+      fd.append('cv', this.selectedPhoto, this.selectedPhoto.name);
+      fd.append('upload_preset', 'lpgw3gby');
+      axios.post('https://api.cloudinary.com/v1_1/dm2d24176/image/upload', fd, {
+        onUploadProgress: (uploadEvent) => {
+          // eslint-disable-next-line no-mixed-operators
+          console.log(`Upload Progress: ${Math.round((uploadEvent.loaded / uploadEvent.total * 100))}%`);
+        },
+      })
+        .then((res) => {
+          console.log(res);
         });
     },
   },

@@ -7,7 +7,8 @@ import Successful from '../components/Successful.vue';
 import CreateApplication from '../components/CreateApplication.vue';
 import ComposeAssessment from '../components/ComposeAssessment.vue';
 import ForgetPassword from '../components/ForgetPassword.vue';
-// import UserSignup from '../components/UserSignup.vue';
+import UserSignup from '../components/UserSignup.vue';
+import History from '../components/AssessmentHistory.vue';
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/signup',
+    name: 'UserSignup',
+    component: UserSignup,
   },
   {
     path: '/dashboard',
@@ -46,6 +52,11 @@ const routes = [
     path: '/forget',
     name: 'ForgetPassword',
     component: ForgetPassword,
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: History,
   },
 ];
 

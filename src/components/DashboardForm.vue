@@ -7,28 +7,36 @@
             </div>
         </div>
         <div class="form-body">
-            <b-form>
+            <b-form enctype="multipart/form-data">
                 <div class="uploads">
                 <div class="body-upload-1">
-                <button class="upload-cv">+ Upload CV</button>
+                    <button class="upload-cv">
+                    <input type="file" @change="onFileSelected"
+                    ref="fileInput"> + Upload CV
+                    </button>
                 </div>
+
                 <div class="body-upload-2">
-                <button class="upload-cv">+ Upload Photo</button>
+                <button class="upload-cv">
+                    <input type="file" @change="onPhotoSelected"
+                    ref="photoInput">
+                + Upload Photo</button>
                 </div>
                 </div>
+
                 <div class="form-wrapper">
                     <div class="form-child-1">
                         <label>First Name</label>
                         <b-form-input
-                            id="inline-form-input-name"
-                            class="input"
+                            id="inline-form-input-firstname"
+                            class="input" v-model="form.firstName"
                             placeholder="">
                         </b-form-input>
                     </div>
                     <div class="form-child-2">
                         <label>Last Name</label>
                         <b-form-input
-                            class="input"
+                            class="input" v-model="form.lastName"
                             id="inline-form-input-lastname"
                             placeholder="">
                         </b-form-input>
@@ -40,15 +48,16 @@
                         <label>Email</label>
                         <b-form-input
                             id="inline-form-input-email"
-                            class="input"
-                            placeholder="">
+                            class="input" v-model="form.email"
+                            placeholder=""
+                            type="email">
                         </b-form-input>
                     </div>
                     <div class="form-child-2">
                         <label>Date of Birth</label>
                         <b-form-input
                             id="inline-form-input-phonenumber"
-                            class="input"
+                            class="input" v-model="form.dob"
                             placeholder="">
                         </b-form-input>
                     </div>
@@ -58,17 +67,19 @@
                     <div class="form-child-1">
                         <label>Address</label>
                         <b-form-input
-                            id="inline-form-input-password"
-                            class="input"
-                            placeholder="">
+                            id="inline-form-input-address"
+                            class="input" v-model="form.address"
+                            placeholder=""
+                            >
                         </b-form-input>
                     </div>
                     <div class="form-child-2">
                         <label>University</label>
                         <b-form-input
-                            id="inline-form-input-confirmpassword"
-                            class="input"
-                            placeholder="">
+                            id="inline-form-input-university"
+                            class="input" v-model="form.university"
+                            placeholder=""
+                            >
                         </b-form-input>
                     </div>
                 </div>
@@ -77,23 +88,23 @@
                     <div class="form-child-1">
                         <label>Course of Study</label>
                         <b-form-input
-                            id="inline-form-input-password"
-                            class="input"
+                            id="inline-form-input-course"
+                            class="input" v-model="form.courseOfStudy"
                             placeholder="">
                         </b-form-input>
                     </div>
                     <div class="form-child-2">
                         <label>CGPA</label>
                         <b-form-input
-                            id="inline-form-input-confirmpassword"
-                            class="input"
+                            id="inline-form-input-cgpa"
+                            class="input" v-model="form.cgpa"
                             placeholder="">
                         </b-form-input>
                     </div>
                 </div>
             <div class="submit-bottom">
-            <a href="TakeAssessment.vue"><b-button block variant="light" id="signup">
-                Submit</b-button></a>
+            <b-button block variant="light" id="signup" @click="applicantRegister">
+                Submit</b-button>
             </div>
         </b-form>
         </div>
@@ -101,16 +112,45 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'DashboardForm',
   data() {
     return {
-      msg: 'Welcome',
+      selectedFile: null,
+      selectedPhoto: null,
       form: {
+
       },
     };
   },
   methods: {
+    ...mapActions(['getUserDetail']),
+    applicantRegister() {
+      console.log(this.form);
+      this.getUserDetail(this.form);
+      this.form = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        dob: '',
+        address: '',
+        university: '',
+        courseOfStudy: '',
+        cgpa: '',
+        cv: '',
+      };
+    },
+    onFileSelected(event) {
+      const { files: [file] } = event.target;
+      this.form.selectedFile = file;
+      // console.log(file);
+    },
+    onPhotoSelected(event) {
+      const { files: [file] } = event.target;
+      this.form.selectedPhoto = file;
+    },
   },
   computed: {
 

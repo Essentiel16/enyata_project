@@ -8,6 +8,8 @@
       <router-link to="/application">Create Application</router-link> |
       <router-link to="/compose">Compose Assessment</router-link> |
       <router-link to="/forget">Forget Password</router-link> |
+      <router-link to="/signup">Signup</router-link> |
+      <router-link to="/history">History</router-link>
     </div>
     <router-view/>
   </div>

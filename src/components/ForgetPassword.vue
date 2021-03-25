@@ -4,7 +4,7 @@
             <h2>Forgot Password</h2>
             <p>Please select option to send link to reset password</p>
         </div>
-        <div class="email">
+        <div class="email" v-on:click.capture="doThis">
             <div class="all-span">
                 <div class="all-span-icon">
                     <img src="../assets/email.svg" alt="email">
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="sms">
+        <div class="sms" v-on:click.capture="doThat">
             <div class="all-span-two">
                 <div class="all-span-icon">
                     <img src="../assets/phone.svg" alt="phone">
@@ -39,6 +39,24 @@
                 <p id="check"><small>Didn't receive link? <a href="#">Resend</a></small></p>
     </div>
 </template>
+<script>
+export default {
+  name: 'ForgetPassword',
+  data() {
+    return {
+      showModal: true,
+    };
+  },
+  methods: {
+    doThis() {
+      alert('We are working on this feature');
+    },
+    doThat() {
+      alert('This service is not available. Kindly use the reset via email route');
+    },
+  },
+};
+</script>
 
 <style scoped>
 .card-forget{
@@ -67,17 +85,19 @@
     font-style: normal;
 }
 .email, .sms{
-    border: 1px solid #7557d3;
+    margin: 48px auto;
     border-radius: 4px;
     background: #fff;
     box-sizing: border-box;
     width: 498px;
     height: 130px;
+    border: 1px solid #e8e8e8
+}
+.email:hover, .sms:hover{
+    border: 1px solid #7557d3;
     box-shadow: 0px 8px 30px 10px rgba(117, 87, 211, 0.04);
-    margin: 48px auto;
 }
 .sms{
-    border: 1px solid #e8e8e8;
     margin: -24px auto;
 }
 .all-span, .all-span-two{
@@ -120,14 +140,14 @@
 .text2{
     margin-left: -26px;
 }
-.text h6, .text2 h6{
-    color: #7557d3;
+.text h6, #msg{
+    color: #211f26;
     font-weight: 600;
     font-style: normal;
     font-size: 18px;
 }
-.text2 h6{
-color: #211f26;
+.text h6:hover, #msg:hover{
+    color: #7557d3;
 }
 .text p, .text2 p{
     font-weight: 400;
