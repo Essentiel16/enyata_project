@@ -4,20 +4,20 @@
             <h2>Forgot Password</h2>
             <p>Please select option to send link to reset password</p>
         </div>
-        <div class="email" v-on:click.capture="doThis">
+        <div class="email">
             <div class="all-span">
-                <div class="all-span-icon">
-                    <img src="../assets/email.svg" alt="email">
-                </div>
-                <div class="text">
-                    <h6>Reset via Email</h6>
-                    <p>Reset password link will be sent to your<br/>
-                    <span> registered email address</span></p>
-                </div>
-                <div class="all-span-icon-right">
-                    <img src="../assets/tick.svg" alt="tick">
-                </div>
-            </div>
+        <div class="all-span-icon">
+            <img src="../assets/email.svg" alt="email">
+        </div>
+        <div class="text">
+            <h6>Reset via Email</h6>
+            <p>Reset password link will be sent to your<br/>
+                <span> registered email address</span></p>
+        </div>
+        <div class="all-span-icon-right">
+            <img src="../assets/tick.svg" alt="tick">
+        </div>
+        </div>
         </div>
         <div class="sms" v-on:click.capture="doThat">
             <div class="all-span-two">
@@ -33,15 +33,20 @@
                 </div>
             </div>
         </div>
-        <div class=" d-flex btn">
-            <button>Send Link</button>
-            </div>
+            <ModalPassword/>
                 <p id="check"><small>Didn't receive link? <a href="#">Resend</a></small></p>
     </div>
 </template>
 <script>
+import ModalPassword from '@/components/ModalPassword.vue';
+// import ModalPassword from './ModalPassword.vue';
+
 export default {
   name: 'ForgetPassword',
+  components: {
+    ModalPassword,
+    // ModalPassword,
+  },
   data() {
     return {
       showModal: true,
@@ -97,6 +102,38 @@ export default {
     border: 1px solid #7557d3;
     box-shadow: 0px 8px 30px 10px rgba(117, 87, 211, 0.04);
 }
+.all-span, .all-span-two{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.all-span-two{
+    gap: 20px;
+}
+.all-span-icon{
+    display: flex;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e7e7e7;
+    justify-content: center;
+    align-items: center;
+    /* margin-left: 18px;
+    margin-top: 30px; */
+}
+.all-span-icon-right{
+    width: 24px;
+    height: 24px;
+    background: #7557d3;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.all-span-icon img{
+    width: 50%;
+    height: 50%;
+}
 .sms{
     margin: -24px auto;
 }
@@ -137,6 +174,23 @@ export default {
 .text, .text2{
     margin-top: 27px;
 }
+.text h6, #msg{
+    color: #211f26;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+}
+.text h6:hover, #msg:hover{
+    color: #7557d3;
+}
+.text p, .text2 p{
+    font-weight: 400;
+    font-size: 14px;
+    color: #b1b1b1;
+}
+.text, .text2{
+    margin-top: 27px;
+}
 .text2{
     margin-left: -26px;
 }
@@ -154,20 +208,7 @@ export default {
     font-size: 14px;
     color: #b1b1b1;
 }
-.btn{
-    margin-top: 48px;
-    justify-content: center;
-}
-button{
-    width: 379px;
-    height: 50px;
-    background-color: #7557d3;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    border: 1px solid #7557d3;
-    border-radius: 4px;
-}
+
 #check{
     color: #b1b1b1;
     font-size: 14px;
