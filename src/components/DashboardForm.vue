@@ -18,27 +18,23 @@
 
                 <div class="body-upload-2">
                 <button class="upload-cv">
-                    <input type="file" @change="onPhotoSelected"
-                    ref="photoInput">
-                + Upload Photo</button>
+                    <input type="file" :class="{'is-invalid': $v.selectedPhoto.$error}"
+                    @change="onPhotoSelected" accept="image/png, image/jpeg"
+                    ref="photoInput"> + Upload Photo</button>
                 </div>
                 </div>
 
                 <div class="form-wrapper">
                     <div class="form-child-1">
                         <label>First Name</label>
-                        <b-form-input
-                            id="inline-form-input-firstname"
-                            class="input" v-model="form.firstName"
-                            placeholder="">
+                        <b-form-input id="inline-form-input-firstname" class="input"
+                        type="text" v-model="form.firstName">
                         </b-form-input>
                     </div>
                     <div class="form-child-2">
                         <label>Last Name</label>
-                        <b-form-input
-                            class="input" v-model="form.lastName"
-                            id="inline-form-input-lastname"
-                            placeholder="">
+                        <b-form-input class="input" v-model="form.lastName"
+                            id="inline-form-input-lastname" type="text">
                         </b-form-input>
                     </div>
                 </div>
@@ -46,11 +42,8 @@
                 <div class="form-wrapper-2">
                     <div class="form-child-1">
                         <label>Email</label>
-                        <b-form-input
-                            id="inline-form-input-email"
-                            class="input" v-model="form.email"
-                            placeholder=""
-                            type="email">
+                        <b-form-input id="inline-form-input-email"
+                            class="input" v-model="form.email" type="email">
                         </b-form-input>
                     </div>
                     <div class="form-child-2">
@@ -113,6 +106,9 @@
 
 <script>
 import { mapActions } from 'vuex';
+import {
+  required, minLength, maxLength, decimal, email, alphaNum,
+} from 'vuelidate/lib/validators';
 
 export default {
   name: 'DashboardForm',
@@ -121,9 +117,37 @@ export default {
       selectedFile: null,
       selectedPhoto: null,
       form: {
-
       },
     };
+  },
+  validations: {
+    selectedPhoto: {
+      required,
+    },
+    firstName: {
+      required, minLength: minLength(3), maxLength: maxLength(100),
+    },
+    lastName: {
+      required, minLength: minLength(3), maxLength: maxLength(100),
+    },
+    email: {
+      required, email,
+    },
+    dob: {
+      required, alphaNum,
+    },
+    address: {
+      required, minLength: minLength(3), maxLength: maxLength(100),
+    },
+    university: {
+      required,
+    },
+    course: {
+      required, minLength: minLength(3), maxLength: maxLength(100),
+    },
+    cgpa: {
+      required, decimal,
+    },
   },
   methods: {
     ...mapActions(['getUserDetail']),
@@ -140,7 +164,14 @@ export default {
         courseOfStudy: '',
         cgpa: '',
         cv: '',
+        agreement: false,
       };
+      this.agreement = true;
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
+      this.$router.push('/assessment');
     },
     onFileSelected(event) {
       const { files: [file] } = event.target;
@@ -149,6 +180,9 @@ export default {
     },
     onPhotoSelected(event) {
       const { files: [file] } = event.target;
+      if (!file.length) {
+        return;
+      }
       this.form.selectedPhoto = file;
     },
   },

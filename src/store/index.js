@@ -6,17 +6,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    users: [],
+    usersDetail: [],
   },
   mutations: {
     setRegister: (state, payload) => {
-      state.users.push(payload);
+      state.usersDetail.push(payload);
     },
   },
   actions: {
     async getUserDetail({ commit }, payload) {
       const formdata = new FormData();
-      console.log(payload);
       const response = await axios.post('https://enyata-recruitment-portal.herokuapp.com/apply', payload, formdata);
       commit('setRegister', response.data);
       console.log(response);
